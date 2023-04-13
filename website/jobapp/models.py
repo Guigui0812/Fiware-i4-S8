@@ -6,3 +6,11 @@ class Job:
         self.location = job_location
         self.date = job_posted_date
         self.company = job_company
+
+class User:
+    def __init__(self, user_id, user_name, user_location, user_job, user_keywords):
+        self.id = user_id
+        self.name = user_name
+        self.location = user_location
+        self.job = user_job
+        self.keywords = user_keywords
