@@ -102,9 +102,24 @@ class IndeedJobsScraper():
             self.scrap_job_details(job["url"], cpt)
             cpt += 1
             time.sleep(3)
+
+# tant que il y a des utilisateurs dans la base
+# on récupère les jobs qui correspondent à leur recherche
+# on les stocke dans la base
+
+#boucler sur tous les utilisateurs
+user_researchs = utils.DataInfoUser.get_user_researches()
+while user_researchs: # tant qu'il y a des utilisateurs dans la base
     
-job_scraper = IndeedJobsScraper("Devops", "Île-de-France", "apprenticeship", 2)
-job_scraper.run_scrap_research_result()
+    # scrap the research result
+    for user_research in user_researchs:
+        job_scraper = IndeedJobsScraper(
+                    user_research["title"]["value"],
+                    user_research["location"]["value"],
+                    user_research["type_contrat"]["value"],
+                    user_research["limit"]["value"],
+                )    
+        job_scraper.run_scrap_research_result()
 
 # print the result as a json
 print(job_scraper.jobs_list)
