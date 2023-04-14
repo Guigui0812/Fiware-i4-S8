@@ -9,6 +9,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    data = request.form
+    print(data)
+    return redirect(url_for('/'))
+
 @app.route('/jobs')
 def get_all_jobs_route():
     jobs = get_all_jobs()

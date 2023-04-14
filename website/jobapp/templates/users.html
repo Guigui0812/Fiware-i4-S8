@@ -25,20 +25,31 @@
                       <label class="block font-bold mb-2" for="title">Nom d'utilisateur</label>
                       <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="text" name="name" placeholder="Titre du job">
                     </div>
-                    <div class="mb-4">
-                      <label class="block font-bold mb-2" for="company">Poste souhaité</label>
-                      <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="text" name="job" placeholder="Entreprise">
+                    <div class="mb-4" id="jobtype">
+                        <label class="block font-bold mb-2" for="title">Les types de jobs qui vous intéressent</label>
+                        <select name="job" class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700">
+                            <option value="">-- Choisissez un job --</option>
+                            <option value="developpeur">Développeur</option>
+                            <option value="devops">DevOps</option>
+                            <option value="ingenieur-reseau">Ingénieur Réseau</option>
+                            <option value="administrateur-systeme">Administrateur Système</option>
+                            <option value="data-engineer">Data Engineer</option>
+                            <option value="software-engineer">Software Engineer</option>
+                          </select> 
+                    </div>
+                    <div class="mb-4" id="addjob">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onclick="addJobTypeBox()">Ajouter un job</button>
                     </div>
                     <div class="mb-4">
                         <label class="block font-bold mb-2" for="company">Localisation</label>
                         <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="text" name="location" placeholder="Entreprise">
                     </div>
                     <div class="mb-4" id="keyword">
-                        <label class="block font-bold mb-2" for="company">Mot clé recherché</label>
+                        <label class="block font-bold mb-2" for="company">Mots clés recherché</label>
                         <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="text" name="keyword" placeholder="Entreprise">
                     </div>
                     <div class="mb-4" id="addkeyword">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onclick="addInput()">Ajouter un champ</button>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onclick="addKeyWordBox()">Ajouter un champ</button>
                     </div>
                     <div class="mb-6">
                       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Valider</button>
@@ -51,25 +62,10 @@
     </main>
 
     <footer class="py-6 px-8 bg-gray-800">
-        <p class="text-center text-gray-500">&copy; Work in progress !!! </p>
+        <p class="text-center text-gray-500">&copy; Guillaume ROHEE / Work in progress </p>
     </footer>
 
-    <script>
-        const addInputBtn = document.getElementById('addkeyword');
-        const inputContainer = document.getElementById('keyword');
-        
-        var i = 2;
-
-        addInputBtn.addEventListener('click', function() {
-        const newInput = document.createElement('input');
-        newInput.classList.add('appearance-none', 'block', 'w-full', 'bg-gray-800', 'text-white', 'border', 'border-gray-700', 'rounded', 'py-3', 'px-4', 'mb-3', 'leading-tight', 'focus:outline-none', 'focus:bg-gray-700');
-        newInput.setAttribute('type', 'text');
-        newInput.setAttribute('name', 'keyword');
-        newInput.setAttribute('placeholder', 'Entreprise');
-        i++;
-        inputContainer.appendChild(newInput);
-        });
-    </script>
+    <script src="../static/script.js"></script>
 
 </body>
 </html>
