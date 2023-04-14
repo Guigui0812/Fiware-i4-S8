@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="../static/output.css">
+</head>
+<body class="font-sans bg-gray-900 text-white">
+
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <h2 class="text-center text-xl font-bold mb-6">Connectez-vous à votre compte</h2>
+            <form class="space-y-4"">
+                <div>
+                    <label class="block font-bold mb-2" for="username">
+                        Nom d'utilisateur
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-700 text-white border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-gray-500" id="username" required="required" type="text" name="username" placeholder="Nom d'utilisateur">
+                </div>
+                <div>
+                    <label class="block font-bold mb-2" for="password">
+                        Mot de passe
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-700 text-white border border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-600 focus:border-gray-500" id="password" type="password" required="required" name="password" placeholder="*********">
+                </div>
+                <div>
+                    <button class="w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="login()">
+                        Connexion
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+
+</body>
+</html>
