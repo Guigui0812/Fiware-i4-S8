@@ -14,7 +14,7 @@ function addKeyWordBox() {
 function addJobTypeBox() {
     var form = document.getElementById("jobtype");
     var input = document.createElement("select");
-    input.setAttribute("name", "jobtypes");
+    input.setAttribute("name", "job");
     input.classList.add('appearance-none', 'block', 'w-full', 'bg-gray-800', 'text-white', 'border', 'border-gray-700', 'rounded', 'py-3', 'px-4', 'mb-3', 'leading-tight', 'focus:outline-none', 'focus:bg-gray-700');
     input.setAttribute("required", "required");
     input.innerHTML =  '<option value="">-- Choisissez un job --</option>'
@@ -28,8 +28,9 @@ function addJobTypeBox() {
     form.appendChild(input);
 }
 
-// Login AJAX request
-function login() {
+// Login AJAX request (check si je dois faire une promise)
+function login(event) {
+    event.preventDefault();
     fetch('/login', {
         method: 'POST',
         body: JSON.stringify({
@@ -39,12 +40,14 @@ function login() {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(response => response.json())
+    })
+    .then(response => response.json())
     .then(data => {
-        if (data.status == 'success') {
-            window.location.href = '/';
+        if (data.status === 'success') {
+            window.location.href = '/jobs';
         } else {
             document.getElementById('login-error').innerHTML = data.message;
         }
-    }
-)}
+    })
+    .catch(error => console.error(error));
+}

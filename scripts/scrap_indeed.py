@@ -103,7 +103,7 @@ class IndeedJobsScraper():
             cpt += 1
             time.sleep(3)
     
-job_scraper = IndeedJobsScraper("Devops", "Île-de-France", "apprenticeship", 2)
+job_scraper = IndeedJobsScraper("Devops", "Île-de-France", "apprenticeship", 20)
 job_scraper.run_scrap_research_result()
 
 # print the result as a json
