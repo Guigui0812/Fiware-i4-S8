@@ -55,6 +55,7 @@ class APIConnection:
         if response.status_code != 201:
             print(response.text)
 
+    @staticmethod
     def get_user(username):
 
         response = requests.get(url="http://localhost:1026/v2/entities/" + username)
@@ -63,16 +64,17 @@ class APIConnection:
             return response.json()
         else:
             return None
-        
+    
+    @staticmethod
     def get_user_jobs(keywords_researched, location_researched, job_researched):
 
         response = requests.get(url="http://localhost:1026/v2/entities?type=Job")
 
         all_jobs = response.json()
 
-        print(keywords_researched)
-
         jobs_list = []
+
+        print(jobs_list)
 
         for job in all_jobs:
             job_data = {
@@ -85,19 +87,28 @@ class APIConnection:
             }
             jobs_list.append(job_data)
 
-        for job in jobs_list:
+        i = 0
+        while i < len(jobs_list):
+            job = jobs_list[i]
+            job_ok = False
 
-            job_ok = True
+            # Check if the job title contains the job researched
+            for title in job_researched:
+                print(job.get("title"))
+                if title in job.get("title").lower():
+                    print(job.get("title"))
+                    job_ok = True
+            
+            # Check if the job title contains the keyword researched
+            for keyword in keywords_researched:
+                if keyword in job.get("description").lower():
+                    job_ok = True
 
-            if job["title"] not in job_researched:
-                job_ok = False
+            if job_ok == False:
+                jobs_list.pop(i)
+            else:
+                i += 1
 
-            for keyword in job["description"].split():
-                if keyword not in keywords_researched:
-                    job_ok = False
-
-            if not job_ok:
-                print(job["title"])
-                jobs_list.remove(job)
+        print(jobs_list)
 
         return jobs_list

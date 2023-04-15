@@ -3,7 +3,7 @@ function addKeyWordBox() {
     var form = document.getElementById("keyword");
     var input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("name", "keywords");
+    input.setAttribute("name", "keyword");
     input.setAttribute("placeholder", "Enter a keyword");
     input.classList.add('appearance-none', 'block', 'w-full', 'bg-gray-800', 'text-white', 'border', 'border-gray-700', 'rounded', 'py-3', 'px-4', 'mb-3', 'leading-tight', 'focus:outline-none', 'focus:bg-gray-700');
     input.setAttribute("required", "required");

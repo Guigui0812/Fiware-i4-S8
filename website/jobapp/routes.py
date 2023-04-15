@@ -34,7 +34,6 @@ def login_post():
 # Route to display all jobs
 @app.route('/jobs')
 def get_jobs_route():
-
     username = session.get('username')
     jobs = get_jobs(username)
     return render_template('jobs.html', jobs=jobs)
