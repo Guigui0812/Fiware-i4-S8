@@ -20,10 +20,14 @@
             <div class="bg-gray-900 text-white py-12">
                 <div class="container mx-auto px-8">
                   <h2 class="text-3xl font-bold mb-8 text-center">Créer un profil de recherche</h2>
-                  <form class="max-w-md mx-auto" method="post" action="/create_user">
+                  <form class="max-w-md mx-auto" method="post" action="/register">
                     <div class="mb-4">
                       <label class="block font-bold mb-2" for="title">Nom d'utilisateur</label>
                       <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="text" name="name" placeholder="Titre du job">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block font-bold mb-2" for="title">Mot de passe</label>
+                        <input class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700" type="password" name="password" placeholder="********">
                     </div>
                     <div class="mb-4" id="jobtype">
                         <label class="block font-bold mb-2" for="title">Les types de jobs qui vous intéressent</label>

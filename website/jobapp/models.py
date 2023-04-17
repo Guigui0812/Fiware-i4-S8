@@ -8,9 +8,9 @@ class Job:
         self.company = job_company
 
 class User:
-    def __init__(self, user_id, user_name, user_location, user_job, user_keywords):
-        self.id = user_id
+    def __init__(self, user_name, user_location, user_job, user_keywords, user_password):
         self.name = user_name
+        self.password = user_password
         self.location = user_location
         self.job = user_job
         self.keywords = user_keywords
