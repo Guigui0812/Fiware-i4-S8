@@ -12,15 +12,18 @@
           <hr class="border-gray-600 mb-8">
           <div class="jobs">
             {% for job in jobs %}
-              <div class="bg-gray-800 rounded-lg mb-4 p-4">
+              <div id="job{{ loop.index }}" class="bg-gray-800 rounded-lg mb-4 p-4">
                 <h3 class="text-xl font-bold">{{ job["title"] }}</h3>
                 <p class="text-gray-400">{{ job["company"] }} - {{ job["date"] }}</p>
-                <p class="mt-2 mb-6 mx-auto">{{ job["description"] }}</p>
+                <p class="mt-2 mb-6 mx-auto" name="description">{{ job["description"] }}</p>
                 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href="{{ job['url'] }}">Voir le job</a>
+                <button id="generateBtn{{ loop.index }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick ="generateMotivationLetter(this, event)">Générer une lettre de motivation</button>
               </div>
             {% endfor %}
           </div>
         </div>
-    </div>      
+    </div>     
+    
+    <script src="../static/script.js"></script>
 </body>
 </html>

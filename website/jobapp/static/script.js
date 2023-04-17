@@ -51,3 +51,32 @@ function login(event) {
     })
     .catch(error => console.error(error));
 }
+
+// Generate letter AJAX request
+function generateMotivationLetter(button, event){
+    event.preventDefault();
+
+    const parentDiv = button.closest('.bg-gray-800'); // sélectionne la div parente
+    const descriptionElement = parentDiv.querySelector('p[name="description"]'); // sélectionne le <p> ayant name="description"
+    const descriptionContent = descriptionElement.textContent; // récupère le contenu textuel du <p>
+    
+    console.log(descriptionContent);
+
+    fetch('/generate', {
+        method: 'POST',
+        body: JSON.stringify({
+            description: descriptionContent
+        }),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log(data.message);
+        } else {
+            console.log(data.message);
+        }
+    })
+}
