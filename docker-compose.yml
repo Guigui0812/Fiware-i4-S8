@@ -4,6 +4,9 @@ services:
   mongo:
     image: mongo:4.4
     command: --nojournal
+    volumes:
+      - ./mongo:/data/db
+
   orion:
     image: fiware/orion
     links:

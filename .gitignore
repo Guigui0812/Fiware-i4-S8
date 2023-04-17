@@ -180,3 +180,6 @@ dist/
 # Autres fichiers
 *.DS_Store
 *.log
+
+# Ignore the mongo data directory
+mongo/
