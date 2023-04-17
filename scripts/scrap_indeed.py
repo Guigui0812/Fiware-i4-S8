@@ -6,16 +6,14 @@ import json
 
 # Create a class to scrap the research result from indeed
 class IndeedJobsScraper():
-
     def __init__(self, titre, lieu, type_contrat, limit):
-        
         self.titre = titre.capitalize()
         self.lieu = lieu.capitalize()
-        self.type_contrat = type_contrat
+        self.type_contrat = ",".join([keyword for keyword in type_contrat if keyword]) # Convertir la liste en chaîne de caractères avec "," comme séparateur, en excluant les éléments vides
         self.page = 0
         self.limit = limit * 10
         self.scrap = True
-        self.url = "https://fr.indeed.com/emplois?q=" + titre + "&l=" + lieu + "&sc=0kf%3Ajt%28" + type_contrat + "%29%3B&start=" + str(self.page)
+        self.url = "https://fr.indeed.com/emplois?q=" + titre + "&l=" + lieu + "&sc=0kf%3Ajt%28" + ','.join(type_contrat) + "%29%3B&start=" + str(self.page)
         self.url = self.url.replace(' ', '+')
         self.jobs_list = []
 
@@ -102,11 +100,31 @@ class IndeedJobsScraper():
             self.scrap_job_details(job["url"], cpt)
             cpt += 1
             time.sleep(3)
-    
-job_scraper = IndeedJobsScraper("Devops", "Île-de-France", "apprenticeship", 20)
-job_scraper.run_scrap_research_result()
 
-# print the result as a json
-print(job_scraper.jobs_list)
+# tant que il y a des utilisateurs dans la base
+# on récupère les jobs qui correspondent à leur recherche
+# on les stocke dans la base
 
-job_scraper.store_jobs()
+#boucler sur tous les utilisateurs
+# Obtenez les préférences des utilisateurs
+users = utils.DataInfoUser.get_user_researches()
+
+for user in users:
+    job_value = user.get("job", {}).get("value", "")
+    location_value = user.get("location", {}).get("value", "")
+    keyword_value = user.get("keyword", {}).get("value", [])#exemple python innutile au moment du scrap
+
+    if job_value and location_value:
+        job_scraper = IndeedJobsScraper(
+            titre=job_value,
+            lieu=location_value,
+            type_contrat = "apprenticeship",
+            limit=10  # You can change this value to determine the search results limit
+        )
+        job_scraper.run_scrap_research_result()
+        print(job_scraper.jobs_list)
+        job_scraper.store_jobs()
+
+
+
+
