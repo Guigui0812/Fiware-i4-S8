@@ -143,6 +143,6 @@ class OpenAIConnection:
 
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Conçoit un modèle de lettre de motivation pour ce job : " + job_description}])   
+        messages=[{"role": "user", "content": "Conçoit un modèle de lettre de motivation pour ce job (mets des </br> pour les sauts car ce sera affiché sur du html): " + job_description}])   
 
-        print(completion.choices[0].message)
+        return completion['choices'][0]['message']['content']

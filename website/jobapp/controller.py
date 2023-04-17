@@ -26,6 +26,11 @@ def get_jobs(username):
 
     return jobs
 
+def generate_letter(description):
+
+    letter = OpenAIConnection.generate_motivation_letter(description)
+    return letter
+
 def create_user(data):
 
     # Création d'un dictionnaire avec les données du formulaire

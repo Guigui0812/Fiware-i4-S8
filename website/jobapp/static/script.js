@@ -74,7 +74,7 @@ function generateMotivationLetter(button, event){
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            console.log(data.message);
+            window.location.replace(`/letter?content=${encodeURIComponent(data.letter_content)}`);
         } else {
             console.log(data.message);
         }
