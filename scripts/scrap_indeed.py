@@ -7,13 +7,15 @@ import json
 # Create a class to scrap the research result from indeed
 class IndeedJobsScraper():
     def __init__(self, titre, lieu, type_contrat, limit):
-        self.titre = titre.capitalize()
+        tmp_title = titre.capitalize()
+        self.titre = tmp_title.replace(' ', '+')
+        print (titre) 
         self.lieu = lieu.capitalize()
         self.type_contrat = ",".join([keyword for keyword in type_contrat if keyword]) # Convertir la liste en chaîne de caractères avec "," comme séparateur, en excluant les éléments vides
         self.page = 0
-        self.limit = limit * 0
+        self.limit = limit
         self.scrap = True
-        self.url = "https://fr.indeed.com/emplois?q=" + titre + "&l=" + lieu + "&sc=0kf%3Ajt%28" + type_contrat + "%29%3B&start=" + str(self.page)
+        self.url = "https://fr.indeed.com/emplois?q=" + self.titre + "&l=" + self.lieu + "&sc=0kf%3Ajt%28" +type_contrat + "%29%3B&start=" + str(self.page)
         self.url = self.url.replace(' ', '+')
         self.jobs_list = []
 
@@ -128,10 +130,15 @@ for user in users:
         titre=job_value,
         lieu=location_value,
         type_contrat = "apprenticeship",
-        limit=20  # You can change this value to determine the search results limit
+        limit=10  # You can change this value to determine the search results limit #15 jobs avec cette limite pour indeed
     )
     job_scraper.run_scrap_research_result()
-    print(job_scraper.jobs_list)
+
+    for job in job_scraper.jobs_list:   
+        json_job = json.dumps(job, indent=4)
+        print(json_job)
+
+
     job_scraper.store_jobs()
 
 
