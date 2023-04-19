@@ -13,7 +13,10 @@
             <div class="motivation">
                 {{ letter_content|safe }}
             </div>
+            <button id="copyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4" onclick="copyToClipboard()">Copier</button>
+            <button id="editButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 ml-2" onclick="toggleEditMode()">Modifier</button>
         </div>
     </div>
+    <script src="../static/script.js"></script>
 </body>
 </html>
