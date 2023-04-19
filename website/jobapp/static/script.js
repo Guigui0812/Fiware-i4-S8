@@ -20,10 +20,10 @@ function addJobTypeBox() {
     input.innerHTML =  '<option value="">-- Choisissez un job --</option>'
     + '<option value="developpeur">Développeur</option>'
     + '<option value="devops">DevOps</option>'
-    + '<option value="ingenieur-reseau">Ingénieur Réseau</option>'
-    + '<option value="administrateur-systeme">Administrateur Système</option>'
-    + '<option value="data-engineer">Data Engineer</option>'
-    + '<option value="software-engineer">Software Engineer</option>'
+    + '<option value="ingenieur reseau">Ingénieur Réseau</option>'
+    + '<option value="administrateur systeme">Administrateur Système</option>'
+    + '<option value="data engineer">Data Engineer</option>'
+    + '<option value="software engineer">Software Engineer</option>'
     + '</select>';
     form.appendChild(input);
 }

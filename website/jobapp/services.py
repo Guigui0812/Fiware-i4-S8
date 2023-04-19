@@ -91,9 +91,9 @@ class APIConnection:
     @staticmethod
     def get_user_jobs(keywords_researched, location_researched, job_researched):
 
-        response = requests.get(url="http://localhost:1026/v2/entities?type=Job")
-
+        response = requests.get(url="http://localhost:1026/v2/entities?type=Job&limit=1000")
         all_jobs = response.json()
+        
 
         jobs_list = []
 
@@ -118,9 +118,21 @@ class APIConnection:
             # Check if the job title contains the job researched
             for title in job_researched:
                 print(job.get("title"))
-                if title in job.get("title").lower():
-                    print(job.get("title"))
+
+                titles = title.split(" ")#split s'il y a des espaces dans le titre
+               
+                flag_test = True
+                
+                for subtitle in titles: 
+                    
+                    print(subtitle)
+
+                    if subtitle.lower() not in job.get("title").lower():
+                        flag_test = False
+                
+                if flag_test : 
                     job_ok = True
+                
             
             # Check if the job title contains the keyword researched
             for keyword in keywords_researched:
