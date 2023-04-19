@@ -155,6 +155,7 @@ class OpenAIConnection:
 
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Conçoit un modèle de lettre de motivation pour ce job (mets des </br> pour les sauts car ce sera affiché sur du html): " + job_description}])   
+        messages=[{"role": "user", "content": "J'ai besoin que tu écrives la lettre de motivation qui correspond à ce job en respectant certaines contraintes : à chaque retour chariot tu écris </br></br> dans le texte. C'est très important pour la mise en forme. Tu me renvoies le texte de la lettre avec écrit dedans </br></br> à chaque fois que ça change de paragraphe. Tu dois toujours respecter le format d'une lettre de motivation. Tu mets un </br></br> dès le début, après l'objet de la lettre, après Madame Monsieur, après les paragraphes, après la formule de politesse, la signature et à la fin. Il le faut, c'est important, sans ça le texte n'est pas exploitable. \n\n"
+                   + "La description du job c'est ça : " + job_description + "\n\n"}])   
 
         return completion['choices'][0]['message']['content']
