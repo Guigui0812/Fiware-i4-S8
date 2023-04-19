@@ -68,6 +68,6 @@ class DataCleaner:
         # Encode the URL to make it compatible with the context broker
         cleaned_url = DataCleaner.clean_data(url)
         cleaned_url = cleaned_url.replace('/', '%2F')
-        cleaned_url = urllib.parse.quote(cleaned_url, safe=":?&=")
+        cleaned_url = urllib.parse.quote(cleaned_url, safe=":&?=")
 
         return cleaned_url
