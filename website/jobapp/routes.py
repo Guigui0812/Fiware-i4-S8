@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify, session
 from .models import Job
-from .controller import create_user, check_user, get_jobs
+from .controller import create_user, check_user, get_jobs, generate_letter
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -49,3 +49,22 @@ def post_data():
     data = request.form
     create_user(data)
     return 'Formulaire soumis avec succès'
+
+@app.route('/generate', methods=['POST'])
+def generate_motivation_letter():
+
+    description = request.json['description']
+
+    letter_content = generate_letter(description)
+    print(letter_content)
+
+    if letter_content:
+        return jsonify({'status': 'success', 'message': 'Lettre de motivation générée avec succès', 'letter_content': letter_content})
+    else:
+        return jsonify({'status': 'error', 'message': 'Erreur lors de la génération de la lettre de motivation'})
+
+@app.route('/letter')
+def letter():
+    print('letter')
+    letter_content = request.args.get('content')
+    return render_template('letter.html', letter_content=letter_content)
