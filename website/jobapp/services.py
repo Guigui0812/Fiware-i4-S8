@@ -1,7 +1,30 @@
+from dotenv import load_dotenv
+import os
 import requests
 import json
+import openai
+
+load_dotenv()
+SECRET_KEY = os.getenv("OPENAI_KEY")
+openai.api_key = SECRET_KEY
 
 class APIConnection:
+
+    @staticmethod
+    def clean_data(data):
+
+        if "%29" in data:
+            data = data.replace("%29", ")")
+        if "%28" in data:
+            data = data.replace("%28", "(")
+        if "%27" in data:
+            data = data.replace("%27", "'")
+        if "%22" in data:
+            data = data.replace("%22", '"')
+        if "%3B" in data:
+            data = data.replace("%3B", ";")
+
+        return data
 
     @staticmethod
     def get_all_jobs():
@@ -18,7 +41,7 @@ class APIConnection:
                 "company": job["company"]["value"],
                 "location": job["location"]["value"],
                 "date": job["date"]["value"],
-                "description": job["description"]["value"]
+                "description": APIConnection.clean_data(job["description"]["value"])
             }
             jobs_list.append(job_data)
 
@@ -79,11 +102,11 @@ class APIConnection:
         for job in all_jobs:
             job_data = {
                 "id": job["id"],
-                "title": job["title"]["value"],
+                "title": APIConnection.clean_data(job["title"]["value"]),
                 "company": job["company"]["value"],
                 "location": job["location"]["value"],
                 "date": job["date"]["value"],
-                "description": job["description"]["value"]
+                "description": APIConnection.clean_data(job["description"]["value"])
             }
             jobs_list.append(job_data)
 
@@ -112,3 +135,14 @@ class APIConnection:
         print(jobs_list)
 
         return jobs_list
+    
+class OpenAIConnection:
+
+    @staticmethod
+    def generate_motivation_letter(job_description):
+
+        completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": "Conçoit un modèle de lettre de motivation pour ce job (mets des </br> pour les sauts car ce sera affiché sur du html): " + job_description}])   
+
+        return completion['choices'][0]['message']['content']

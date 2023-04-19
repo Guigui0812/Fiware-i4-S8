@@ -1,5 +1,5 @@
 from .models import Job, User
-from .services import APIConnection
+from .services import APIConnection, OpenAIConnection
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def get_all_jobs():
@@ -22,7 +22,14 @@ def get_jobs(username):
 
     jobs = APIConnection.get_user_jobs(user.keywords, user.location, user.job)
 
+    test = OpenAIConnection()
+
     return jobs
+
+def generate_letter(description):
+
+    letter = OpenAIConnection.generate_motivation_letter(description)
+    return letter
 
 def create_user(data):
 
