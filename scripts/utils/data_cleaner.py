@@ -1,5 +1,6 @@
 import re
 import json
+import urllib.parse
 
 class DataCleaner:
 
@@ -54,8 +55,19 @@ class DataCleaner:
         data = data.replace('\n', '')
 
         return data
+                
+
     
     @staticmethod
     def convert_to_json(data):
         data = json.dumps(data, indent=4)
         return data
+    
+    @staticmethod
+    def clean_url(url):
+        # Encode the URL to make it compatible with the context broker
+        cleaned_url = DataCleaner.clean_data(url)
+        cleaned_url = cleaned_url.replace('/', '%2F')
+        cleaned_url = urllib.parse.quote(cleaned_url, safe=":?&=")
+
+        return cleaned_url

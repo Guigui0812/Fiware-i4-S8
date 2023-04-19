@@ -8,8 +8,7 @@ import json
 class IndeedJobsScraper():
     def __init__(self, titre, lieu, type_contrat, limit):
         tmp_title = titre.capitalize()
-        self.titre = tmp_title.replace(' ', '+')
-        print (titre) 
+        self.titre = tmp_title.replace(' ', '+') 
         self.lieu = lieu.capitalize()
         self.type_contrat = ",".join([keyword for keyword in type_contrat if keyword]) # Convertir la liste en chaîne de caractères avec "," comme séparateur, en excluant les éléments vides
         self.page = 0
@@ -63,10 +62,12 @@ class IndeedJobsScraper():
         self.jobs_list[cpt - 1]["location"] = utils.DataCleaner.clean_data(job_location)
         self.jobs_list[cpt - 1]["description"] = utils.DataCleaner.clean_data(job_description)
 
+
     def scrap_result_page(self):
 
         self.driver.get(self.url)
-        print(self.url)
+        print ("self url : " + self.url)
+
 
         # Wait for the page to load
         self.driver.implicitly_wait(5)
@@ -78,9 +79,9 @@ class IndeedJobsScraper():
                 
             job = {
                 "id": element.get_attribute("id"),
-                "url": element.get_attribute("href")
+                "url": element.get_attribute("href")                
             }
-
+            
             self.jobs_list.append(job)
 
         # get span that contains the job publication date
@@ -112,16 +113,16 @@ class IndeedJobsScraper():
 users = utils.DataInfoUser.get_user_researches()
 # Exemple d'utilisation
 orion_url = "http://localhost:1026"
-#utils.DataInfoUser.delete_all_jobs(orion_url)
+utils.DataInfoUser.delete_all_jobs(orion_url)
 
 
 for user in users:
-    print(user)
+    #print(user)
     job_value = ", ".join(user["job"])  # Convert list to string
     location_value = user["location"]
     keyword_value = user["keyword"]
 
-    print(job_value, location_value, keyword_value)
+    #print(job_value, location_value, keyword_value)
 
     if not job_value or not location_value:
         print("One of the fields is empty. Skipping this user.")
@@ -136,7 +137,7 @@ for user in users:
 
     for job in job_scraper.jobs_list:   
         json_job = json.dumps(job, indent=4)
-        print(json_job)
+        #print(json_job)
 
 
     job_scraper.store_jobs()
