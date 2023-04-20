@@ -22,8 +22,14 @@ class APIConnection:
         if "%22" in data:
             data = data.replace("%22", '"')
         if "%3B" in data:
-            data = data.replace("%3B", ";")
-
+            data = data.replace("%3B", ";")     
+        if "%25" in data:
+            data = data.replace("%25", "%")
+        if "2F" in data:
+            data = data.replace("%2F", "/")
+        if "%3D" in data:
+            data = data.replace("%3D", "=")
+        
         return data
 
     @staticmethod
@@ -89,6 +95,13 @@ class APIConnection:
             return None
     
     @staticmethod
+    def clean_url(url):
+        cleaned_url = APIConnection.clean_data(url)
+
+        return cleaned_url
+
+
+    @staticmethod
     def get_user_jobs(keywords_researched, location_researched, job_researched):
 
         response = requests.get(url="http://localhost:1026/v2/entities?type=Job&limit=1000")
@@ -100,13 +113,15 @@ class APIConnection:
         print(jobs_list)
 
         for job in all_jobs:
+            print(job)
             job_data = {
                 "id": job["id"],
                 "title": APIConnection.clean_data(job["title"]["value"]),
                 "company": job["company"]["value"],
                 "location": job["location"]["value"],
                 "date": job["date"]["value"],
-                "description": APIConnection.clean_data(job["description"]["value"])
+                "description": APIConnection.clean_data(job["description"]["value"]),
+                "url": APIConnection.clean_url(job["url"]["value"])
             }
             jobs_list.append(job_data)
 
