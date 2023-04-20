@@ -8,13 +8,16 @@
 <body>
     <div class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-8">
-            <h2 class="text-3xl font-bold mb-8 text-center">Lettre de motivation</h2>
-            <hr class="border-gray-600 mb-8">
-            <div class="motivation">
-                {{ letter_content|safe }}
-            </div>
-            <button id="copyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4" onclick="copyToClipboard()">Copier</button>
-            <button id="editButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 ml-2" onclick="toggleEditMode()">Modifier</button>
+          <div class="text-center mb-8"> <!-- Ajout d'une div pour centrer le logo et le titre -->
+            <img src="../static/logo.png" alt="Logo" class="h-8 mr-2 inline-block"> <!-- Ajout du logo -->
+            <h2 class="text-3xl font-bold inline-block">Lettre de motivation</h2>
+          </div>
+          <hr class="border-gray-600 mb-8">
+          <div class="motivation">
+              {{ letter_content|safe }}
+          </div>
+          <button id="copyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4" onclick="copyToClipboard()">Copier</button>
+          <button id="editButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 ml-2" onclick="toggleEditMode()">Modifier</button>
         </div>
     </div>
     <script src="../static/script.js"></script>

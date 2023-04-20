@@ -8,7 +8,10 @@
 <body>
     <div class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-8">
-          <h2 class="text-3xl font-bold mb-8 text-center">Liste des jobs correspondants :</h2>
+          <div class="text-center mb-8"> <!-- Ajout d'une div pour centrer le logo et le titre -->
+            <img src="../static/logo.png" alt="Logo" class="h-8 mr-2 inline-block"> <!-- Ajout du logo -->
+            <h2 class="text-3xl font-bold inline-block">Liste des jobs correspondants :</h2>
+          </div>
           <hr class="border-gray-600 mb-8">
           <div class="jobs">
             {% for job in jobs %}
